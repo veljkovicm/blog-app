@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { FunctionComponent } from 'react';
+import {
+  Route,
+  Redirect,
+  BrowserRouter as Router,
+  Link,
+} from 'react-router-dom';
 
-function App() {
+import { Feed, Post } from './components';
+import './App.scss';
+
+const App:FunctionComponent = () => {
+
+  const greetingMessage = 'Hello from';
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <div className="header">
+          <div className="header__title-wrapper">
+            <Link to={'/posts'}><h1 className="header__title">JSONPlaceholder blog</h1></Link>
+          </div>
+        </div>
+        <Route
+          path='/posts'
+          component={() => <Feed greetingMessage={greetingMessage} />}
+          exact
+        />
+        <Route path='/post/:id' exact component={() => <Post greetingMessage={greetingMessage} />} />
+        <Route exact path="/">
+          <Redirect to="/posts" />
+        </Route >
+      </Router>
     </div>
   );
 }

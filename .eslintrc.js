@@ -9,7 +9,6 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
   ],
   rules: {
-    "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/indent": [
       "error",
       2,
